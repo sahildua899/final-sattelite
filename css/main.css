@@ -1,0 +1,22 @@
+:root {
+    --background-blue : #ECF4F6;
+    --background-black: #31383f;
+    --text-white: #fff;
+}
+
+
+
+
+body {
+    background: var(--background-blue);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.horizontal-line {
+    border:none;
+    border-top:1.75px dashed rgba(99, 99, 99, 0.3);
+    color:#fff;
+    height:1px;
+    margin-top: 0px;
+}
