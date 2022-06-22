@@ -707,7 +707,7 @@ transform: scale(1.1)
   }
   .spinner {
     position: absolute;
-    width: calc(44.80 - (20px));
+    width: calc(44.80% - (20px));
     height: calc(100vh - 40px);
     top: 0;
     left: 0;
