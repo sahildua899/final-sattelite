@@ -629,7 +629,7 @@ transform: scale(1.1)
     height: 2px;
     background: #31383F;
     margin-bottom: -3px;
-    max-width: 100%;
+   max-width: 100%;
   }
 
   /* 3D Slider */
@@ -707,7 +707,7 @@ transform: scale(1.1)
   }
   .spinner {
     position: absolute;
-    width: calc(46.55vw - (20px));
+    width: calc(45vw - (20px));
     height: calc(100vh - 40px);
     top: 0;
     left: 0;
