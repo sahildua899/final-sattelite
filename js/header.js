@@ -70,7 +70,6 @@ const timeColor = document.getElementById('time').children;
 const horizontalLine = document.querySelectorAll('.horizontal-line');
 const weatherPara = document.querySelector('.Weatherpara');
 const refreshWeather = document.querySelector('.refreshweather');
-const scrollLine = document.querySelector('.scroll-line');
 const Menus = document.querySelectorAll('.item');
 
 
@@ -92,7 +91,6 @@ finalbulb.onclick = function() {
 function lightDarkmode (lighton) {
     if(lighton === true) {
         document.body.style.background = "var(--background-blue)";
-        scrollLine.style.background = "var(--backgroud-black)";
 
         // Time Color
 
@@ -113,7 +111,6 @@ function lightDarkmode (lighton) {
   
     }else {
         document.body.style.background = "var(--background-black)";
-        scrollLine.style.background = "var(--background-blue)";
 
         // Time Color
 
@@ -236,34 +233,34 @@ $(document).ready(function(){
 
 //   Video on Click
 
-let videobtn = document.querySelector(".circle__btn");
-let clip = document.querySelector('.clip');
-let close = document.querySelector('.close');
-let video = document.querySelector('video');
-const playButton = document.querySelector('.play-button');
-videobtn.onclick = function(){
-    videobtn.classList.add('active');
-    clip.classList.add('active');
-    video.play();
-    video.currentTime = 0;
-    console.log(videobtn.classList[1])
+  let videobtn = document.querySelector(".circle__btn");
+  let clip = document.querySelector('.clip');
+  let close = document.querySelector('.close');
+  let video = document.querySelector('video');
+  const playButton = document.querySelector('.play-button');
+  videobtn.onclick = function(){
+      videobtn.classList.add('active');
+      clip.classList.add('active');
+      video.play();
+      video.currentTime = 0;
+      console.log(videobtn.classList[1])
 
-    if(videobtn.classList[1] == "active") {
-        document.body.style.overflow = "hidden"
-    }else {
-        document.body.style.overflow = "visible"
-    }
-}
-
-
+      if(videobtn.classList[1] == "active") {
+          document.body.style.overflow = "hidden"
+      }else {
+          document.body.style.overflow = "visible"
+      }
+  }
 
 
-close.onclick = function(){
-    videobtn.classList.remove('active');
-    clip.classList.remove('active');
-    video.pause();
-    document.body.style.overflow = "visible"
-}
+
+
+  close.onclick = function(){
+      videobtn.classList.remove('active');
+      clip.classList.remove('active');
+      video.pause();
+      document.body.style.overflow = "visible"
+  }
 
 
 
@@ -291,16 +288,6 @@ const appendControls = () => {
     controls.eq(activeIndex).addClass('active');
 }
 
-// const appendControls = () => {
-//     for (let i = 0; i < limit; i++) {if (window.CP.shouldStopExecution(0)) break;
-//       $('.carousel__control').append(`<a href="#" data-index="${i}"></a>`);
-//     }window.CP.exitedLoop(0);
-//     let height = $('.carousel__control').children().last().outerHeight();
-  
-//     $('.carousel__control').css('height', 30 + limit * height);
-//     controls = $('.carousel__control').children();
-//     controls.eq(activeIndex).addClass('active');
-//   };
   
   const setIndexes = () => {
     $('.spinner').children().each((i, el) => {
@@ -400,7 +387,17 @@ const appendControls = () => {
   };
   
   const attachListeners = () => {
+    const carousel__control = document.querySelector('.carousel__control').children;
+    for(let i=0; i<carousel__control.length;i++){
+      let j= [i][0] + 1;
+      setInterval(() => {
+        spin(j)
+      }, 3000);
+      
+    }
   
+    
+
     document.onkeyup = e => {
       switch (e.keyCode) {
         case 38:
@@ -409,9 +406,9 @@ const appendControls = () => {
         case 40:
           spin(1);
           break;}
-  
     };
   
+
     controls.on('click', e => {
       e.preventDefault();
       if (disabled) return;
@@ -436,3 +433,75 @@ const appendControls = () => {
   $(() => {
     init();
   });
+
+
+  // Testing Particles 
+  function pop (e) {
+    let amount = 30;
+    switch (e.target.dataset.type) {
+      case 'shadow':
+      case 'line':
+        amount = 60;
+        break;
+    }
+    // Quick check if user clicked the button using a keyboard
+    if (e.clientX === 0 && e.clientY === 0) {
+      const bbox = e.target.getBoundingClientRect();
+      const x = bbox.left + bbox.width / 2;
+      const y = bbox.top + bbox.height / 2;
+      for (let i = 0; i < 30; i++) {
+        // We call the function createParticle 30 times
+        // We pass the coordinates of the button for x & y values
+        createParticle(x, y, e.target.dataset.type);
+      }
+    } else {
+      for (let i = 0; i < amount; i++) {
+        createParticle(e.clientX, e.clientY + window.scrollY, e.target.dataset.type);
+      }
+    }
+  }
+  function createParticle (x, y, type) {
+    const particle = document.createElement('particle');
+    document.body.appendChild(particle);
+    let width = Math.floor(Math.random() * 30 + 8);
+    let height = width;
+    let destinationX = (Math.random() - 0.5) * 200;
+    let destinationY = (Math.random() - 0.5) * 200;
+    let rotation = Math.random() * 420;
+    let delay = Math.random() * 100;
+    
+    switch (type) {
+      case 'square':
+        particle.style.background = `hsl(${Math.random() * 90 + 270}, 90%, 60%)`;
+        particle.style.border = '1px solid white';
+        break;
+      
+    }
+    
+    particle.style.width = `${width}px`;
+    particle.style.height = `${height}px`;
+    const animation = particle.animate([
+      {
+        transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(0deg)`,
+        opacity: 0.2
+      },
+      {
+        transform: `translate(-50%, -50%) translate(${x + destinationX}px, ${y + destinationY}px) rotate(${rotation}deg)`,
+        opacity: 0
+      }
+    ], {
+      duration: Math.random() * 1000 + 5000,
+      easing: 'cubic-bezier(0, .9, .57, 1)',
+      delay: delay
+    });
+    animation.onfinish = removeParticle;
+  }
+  function removeParticle (e) {
+    e.srcElement.effect.target.remove();
+  }
+  
+  if (document.body.animate) {
+    document.querySelectorAll('img').forEach(img => img.addEventListener('click', pop));
+    document.querySelectorAll('li').forEach(li => li.addEventListener('click', pop));
+  }
+  

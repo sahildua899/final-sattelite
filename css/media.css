@@ -98,6 +98,28 @@
       .carousel {
         height: 50%;
       }
+      .banner-slider-container {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 50px;
+      }
+      .banner-slider-container img {
+        width: 100%;
+        left: 0;
+      }
+      .two-column-bottom {
+        flex-direction: column;
+      }
+      .column-one-left {
+        width: 100%;
+      }
+      .fashion-container .card h5 {
+        display: none;
+      }
+      .two-column-bottom .column-two-right {
+        width: 100%;
+      }
 }
 
 
@@ -106,3 +128,7 @@
     max-width: 90%;
   }
 }
+
+
+
+
